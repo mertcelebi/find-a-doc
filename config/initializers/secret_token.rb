@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-FindADoc::Application.config.secret_key_base = '0baac83a52b5a463e661d8ba7348fb1a06083b87a5a0d180f47f3c423596a47ccd61ead3a846021db7cab3352663f1e074dc25e95e2e0ad3787235f224d50841'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+FindADoc::Application.config.secret_key_base = secure_token
