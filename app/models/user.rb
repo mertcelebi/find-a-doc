@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
 
   # Validations
-  validates_presence_of :name, :email
+  validates_presence_of :name, :email, :zipcode
   validates_uniqueness_of :email
   validates_length_of :password, minimum: 6
 
