@@ -9,9 +9,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :state
       t.string :zipcode
       t.string :password_digest
-      t.boolean :admin, default: false
-      t.string :remember_token
-      t.index :remember_token # Index session token
       t.index :email # Index email
       t.timestamps
     end

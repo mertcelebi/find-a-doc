@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   before_create :create_remember_token
 
   # Validations
-  validates_presence_of :name, :email, :zipcode
+  validates_presence_of :name, :email, :state, :zipcode
   validates_uniqueness_of :email
   validates_length_of :password, minimum: 6
 
