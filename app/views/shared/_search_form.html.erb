@@ -1,7 +1,11 @@
 <%= form_for(@search) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+    <%= f.label :state, "State*" %>
+    <%= f.text_field :state, placeholder: "#{@current_user.state}" %>
+    <%= f.label :zipcode, "Zipcode*" %>
+    <%= f.text_field :zipcode, placeholder: "#{@current_user.zipcode}" %>
   </div>
   <%= f.submit "Search", class: "btn btn-large btn-primary" %>
 <% end %>
+

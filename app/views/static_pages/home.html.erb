@@ -9,8 +9,8 @@
       </section>
     </aside>
     <div class="span8">
-      <h3>Search Feed</h3>
-      <%= render 'shared/feed' %>
+      <h3>Past Searches (<%= @feed_items.count %>)</h3>  
+      <% render 'shared/feed' %>
     </div>
   </div>
 <% else %>

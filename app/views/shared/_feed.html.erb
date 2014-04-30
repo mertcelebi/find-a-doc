@@ -1,4 +1,6 @@
+console.log ('Hello222')
 <% if @feed_items.any? %>
+  console.log ('Hello')
   <ol class="searches">
     <%= render partial: 'shared/feed_item', collection: @feed_items %>
   </ol>
