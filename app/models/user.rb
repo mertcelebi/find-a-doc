@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   before_create :create_remember_token
 
+  # Associations
+  has_many :searches, dependent: :destroy
+
   # Validations
   validates_presence_of :name, :email, :state, :zipcode
   validates_uniqueness_of :email
@@ -18,6 +21,11 @@ class User < ActiveRecord::Base
 
   def User.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def feed
+    # Preliminary implementation
+    Search.where("user_id = ?", id)
   end
 
   private

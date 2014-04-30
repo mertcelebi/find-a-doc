@@ -8,4 +8,13 @@
       </h1>
     </section>
   </aside>
+  <div class="span8">
+    <% if @user.searches.any? %>
+      <h3>Past Searches (<%= @user.searches.count %>)</h3>
+      <ol class="searches">
+        <%= render @searches %>
+      </ol>
+      <%= will_paginate @searches %>
+    <% end %>
+  </div>
 </div>

@@ -2,6 +2,7 @@ FindADoc::Application.routes.draw do
   
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :searches, only: [:create, :destroy]
 
   root  'static_pages#home'
   match '/about_us', to: 'static_pages#about_us', via: 'get'

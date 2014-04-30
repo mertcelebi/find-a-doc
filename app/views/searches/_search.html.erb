@@ -1,0 +1,11 @@
+<li>
+  <span class="content"><%= search.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(search.created_at) %> ago.
+  </span>
+  <% if current_user?(search.user) %>
+    <%= link_to "Delete", search, method: :delete,
+                                  data: { confirm: "Are you sure?" },
+                                  title: search.zipcode %>
+  <% end %>
+</li>
