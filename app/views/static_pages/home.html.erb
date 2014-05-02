@@ -5,7 +5,7 @@
         <%= render 'shared/user_info' %>
       </section>
       <section>
-        <h1>Past Searches (<%= @feed_items.count %>)</h3>  
+        <h3>Past Searches (<%= @feed_items.count %>)</h3>  
         <%= render 'shared/feed' %>
       </section>
     </aside>
@@ -19,7 +19,7 @@
       height="300"
       frameborder="0" style="border:0"
       src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0FKqGtrDLb75TcmCX9DZTZyY-GhB8nLA
-    &q=Space+Needle,Seattle+WA">
+    &q=<%=current_user.zipcode%>">
     </iframe>
   </div>
 <% else %>
