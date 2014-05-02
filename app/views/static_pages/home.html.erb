@@ -8,10 +8,17 @@
         <%= render 'shared/search_form' %>
       </section>
     </aside>
-    <div class="span8">
+    <iframe
+      width="450"
+      height="300"
+      frameborder="0" style="border:0"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0FKqGtrDLb75TcmCX9DZTZyY-GhB8nLA
+    &q=Space+Needle,Seattle+WA">
+    </iframe>
+    <aside class="span4">
       <h3>Past Searches (<%= @feed_items.count %>)</h3>  
-      <% render 'shared/feed' %>
-    </div>
+      <%= render 'shared/feed' %>
+    </aside>
   </div>
 <% else %>
   <div class="center hero-unit">

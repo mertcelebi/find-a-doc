@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    # @search  = current_user.searches.build
     @searches = @user.searches.paginate(page: params[:page])
   end
 
@@ -29,10 +30,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-
+    @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "You have successfully updated your profile."
       redirect_to root_url
@@ -50,14 +52,14 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :state, :zipcode, :password,
-                                   :password_confirmation)
+      params.require(:user).permit(:name, :email, :address, :city, :state, 
+                                   :zipcode, :password, :password_confirmation)
     end
 
     # Before filters
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
+      redirect_to root_url unless current_user?(@user)
     end
 
     def admin_user

@@ -1,6 +1,10 @@
 <%= form_for(@search) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
+    <%= f.label :address, "Address" %>
+    <%= f.text_field :address, placeholder: "#{@current_user.address}" %>
+    <%= f.label :city, "City" %>
+    <%= f.text_field :city, placeholder: "#{@current_user.city}" %>
     <%= f.label :state, "State*" %>
     <%= f.text_field :state, placeholder: "#{@current_user.state}" %>
     <%= f.label :zipcode, "Zipcode*" %>

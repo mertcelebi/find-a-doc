@@ -25,7 +25,7 @@ class SearchesController < ApplicationController
   private
 
     def search_params
-      params.require(:search).permit(:state, :zipcode)
+      params.require(:search).permit(:address, :city, :state, :zipcode)
     end
 
     def correct_user

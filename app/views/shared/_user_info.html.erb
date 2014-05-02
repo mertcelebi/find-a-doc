@@ -1,10 +1,18 @@
-<%= link_to gravatar_for(current_user, size: 52), current_user %>
+<%= link_to gravatar_for(current_user, size: 90 ), current_user %>
 <h1>
   <%= current_user.name %>
 </h1>
 <span>
-  <%= link_to "View my profile", current_user %>
+  <%= current_user.address %>
 </span>
 <span>
-  <%= pluralize(current_user.searches.count, "past searches") %>
+  <%= current_user.city %>
+</span>
+<span>
+  <%= current_user.state%>
+  <%= p"-"%>
+  <%= current_user.zipcode%>
+</span>
+<span>
+  <%= link_to "View my profile", current_user %>
 </span>
