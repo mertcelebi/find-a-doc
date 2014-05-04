@@ -7,6 +7,7 @@ gem 'sprockets', '2.11.0'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'font-awesome-rails'
+gem "paperclip", "~> 4.1"
 
 # Use postgresql as the database for Active Record
 gem 'pg'
