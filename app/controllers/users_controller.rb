@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # @search  = current_user.searches.build
+    @search  = current_user.searches.build
     @searches = @user.searches.paginate(page: params[:page])
   end
 

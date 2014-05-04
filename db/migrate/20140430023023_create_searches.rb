@@ -14,4 +14,5 @@ class CreateSearches < ActiveRecord::Migration
     end
     add_index :searches, [:user_id, :created_at]
   end
+
 end

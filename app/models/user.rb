@@ -27,7 +27,6 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    # Preliminary implementation
     Search.where("user_id = ?", id)
   end
 

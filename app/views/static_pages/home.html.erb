@@ -14,16 +14,26 @@
           <%= render 'shared/search_form' %>
       </section>
     </aside>
-    <iframe
-      width="450"
-      height="300"
-      frameborder="0" style="border:0"
-      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0FKqGtrDLb75TcmCX9DZTZyY-GhB8nLA
-    &q=<%= @feed_items.first.address %>
-       <%= @feed_items.first.city %>
-       <%= @feed_items.first.state %>
-       <%= @feed_items.first.zipcode %> USA">
-    </iframe>
+    <% if @feed_items.any? %>
+      <iframe
+        width="450"
+        height="300"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0FKqGtrDLb75TcmCX9DZTZyY-GhB8nLA
+      &q= <%= @feed_items.first.address %>
+          <%= @feed_items.first.city %>
+          <%= @feed_items.first.state %>
+          <%= @feed_items.first.zipcode %> USA">
+      </iframe>
+    <% else %>
+      <iframe
+          width="450"
+          height="300"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0FKqGtrDLb75TcmCX9DZTZyY-GhB8nLA
+        &q=<%= current_user.zipcode %> USA">
+      </iframe>
+    <% end %>
   </div>
 <% else %>
   <div class="center hero-unit">
