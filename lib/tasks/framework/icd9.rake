@@ -3,7 +3,7 @@
 namespace :framework do
   desc "Scrape data about ICD-9 codes"
   task icd9: :environment do
-    print "Parsing ICD-9 codes\n"
+    print "Parsing ICD-9 codes...\n"
     agent = Mechanize.new
     base_url = "http://www.icd9data.com/2013/Volume1/default.htm"
     parse_page_icd9(base_url, agent, 1, 2)

@@ -2,12 +2,19 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
+
+# Styling
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'sprockets', '2.11.0'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'font-awesome-rails'
 gem "paperclip", "~> 4.1"
+
+# Autocompletion
+# gem 'select2-rails'
+# gem 'kaminari'
+gem 'rails4-autocomplete'
 
 # Use postgresql as the database for Active Record
 gem 'pg'

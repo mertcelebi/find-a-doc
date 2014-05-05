@@ -3,7 +3,7 @@
 namespace :framework do
   desc "Scrape data about symptoms"
   task symptoms: :environment do
-    print "Parsing symptoms\n"
+    print "Parsing symptoms...\n"
     agent = Mechanize.new
     base_url = "http://www.icd9data.com/2013/Volume1/default.htm"
     parse_page_symptom(base_url, agent, 1, 2)

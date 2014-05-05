@@ -121,6 +121,8 @@ GEM
       sprockets-rails (~> 2.0.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
+    rails4-autocomplete (1.0.7)
+      rails (>= 3.0)
     railties (4.0.3)
       actionpack (= 4.0.3)
       activesupport (= 4.0.3)
@@ -204,6 +206,7 @@ DEPENDENCIES
   pg
   rails (= 4.0.3)
   rails-observers
+  rails4-autocomplete
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
