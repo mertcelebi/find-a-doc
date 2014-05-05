@@ -6,9 +6,6 @@ class CreateProviders < ActiveRecord::Migration
       t.string :email
       t.string :department
       t.string :hospitaL_id
-      t.datetime :practicing_since
-      t.string :school
-      t.string :residency
       t.timestamps
     end
   
