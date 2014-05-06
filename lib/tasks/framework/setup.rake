@@ -7,7 +7,6 @@ namespace :framework do
     # "framework:hospitals", # Parse CT hospitals
     # "framework:providers"
     # "framework:backus"
-    # "framework:bridgeport"
     # "framework:hocc"
     # "framework:ccmc"
     # "framework:ynhh"
