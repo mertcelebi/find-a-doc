@@ -20,7 +20,6 @@ def process_page_lmh(url, agent)
   rows[0..(rows.length - 1)].each do |tr|
     name = tr.search(".block h1").text.titleize
     if name != " , "
-      print "......Parsing #{name}"
       tag = tr.search(".DrDetail h4")
       speci = tr.search(".DrDetail p")
       i = 0
@@ -28,6 +27,7 @@ def process_page_lmh(url, agent)
         tag = sp.text
         if tag == "Specialties:"
           spec = speci[i - 1].text.titleize
+          print "......Parsing #{name} #{spec}"
           hospital = Hospital.find_by_name(hospital_name)
           hid = hospital.id.to_s
           provider  = Provider.create(name: name, hospital_id: hid)

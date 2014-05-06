@@ -21,7 +21,7 @@ def process_page_chh(url, agent)
     name = tr.search("span strong").text.titleize
     spec = tr.search("h3 strong span").text.titleize
     if name != " , "
-      print "......Parsing #{name}"
+      print "......Parsing #{name} #{spec}"
       hospital = Hospital.find_by_name(hospital_name)
       hid = hospital.id.to_s
       provider  = Provider.create(name: name, hospital_id: hid)

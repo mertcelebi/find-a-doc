@@ -22,7 +22,7 @@ def process_page_vincent(url, agent)
     last = tr.search("h5 a").first.text.split(" ", 2).last.squeeze(" ").strip.titleize
     name = name + " " + last
     spec = tr.search(".subtitle").text.squeeze(" ").strip.titleize
-    print "......Parsing #{name}"
+    print "......Parsing #{name} #{spec}"
     hospital = Hospital.find_by_name(hospital_name)
     hid = hospital.id.to_s
     provider  = Provider.create(name: name, hospital_id: hid)

@@ -18,7 +18,7 @@ def parse_page_hocc(url, agent)
     name = li.search("b").text.squeeze(" ").strip.titleize
     if name != " "
       spec = li.text.split("Specializes in ", 2).last.split(" Need", 2).first.squeeze(" ").strip.titleize
-      print "......Parsing #{name}..."
+      print "......Parsing #{name} #{spec}"
       hospital = Hospital.find_by_name(hospital_name)
       hid = hospital.id.to_s
       provider  = Provider.create(name: name, hospital_id: hid)

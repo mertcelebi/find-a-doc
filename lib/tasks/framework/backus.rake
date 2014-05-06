@@ -18,7 +18,7 @@ def parse_page_backus(url, agent)
     name = li.search(".name").text.titleize
     spec = li.search(".department").text.titleize
     if !(name.blank?)
-      print "......Parsing #{name}"
+      print "......Parsing #{name} #{spec}"
       hospital = Hospital.find_by_name(hospital_name)
       hid = hospital.id.to_s
       provider  = Provider.create(name: name, hospital_id: hid)

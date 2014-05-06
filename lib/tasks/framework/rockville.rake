@@ -20,12 +20,12 @@ def process_page_nmh(url, agent)
   rowsOdd[0..(rowsOdd.length - 1)].each do |tr|
     name = tr.search("td a").text
     if name != ""
-      print "......Parsing #{name}"
       speci = tr.search("td")
       i = 0
       speci[0..(speci.length - 1)].each do |temp|
         if i == 1
           spec = temp.text.squeeze(" ").strip.titleize
+          print "......Parsing #{name} #{spec}"
           hospital1 = Hospital.find_by_name(hospital_name1)
           hid1 = hospital1.id.to_s
           hospital2 = Hospital.find_by_name(hospital_name2)

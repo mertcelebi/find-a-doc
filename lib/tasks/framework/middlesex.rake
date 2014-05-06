@@ -29,8 +29,8 @@ end
 def abstract_away(tr)
   hospital_name = "Middlesex Hospital".titleize
   name = tr.search("td a").text.titleize
-  print "......Parsing #{name}"
   spec = tr.search("td")[2].text.split(",", 2).first
+  print "......Parsing #{name} #{spec}"
   hospital = Hospital.find_by_name(hospital_name)
   hid = hospital.id.to_s
   provider  = Provider.create(name: name, hospital_id: hid)

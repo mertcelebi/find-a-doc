@@ -22,7 +22,7 @@ def process_page_ynhh(url, agent)
     link = tr.search("a").first
     name = link.text.titleize
     spec = tr.search("strong").last.text.titleize
-    print "......Parsing #{name}"
+    print "......Parsing #{name} #{spec}"
     hospital1 = Hospital.find_by_name(hospital_name1)
     hid1 = hospital1.id.to_s
     provider  = Provider.create(name: name, hospital_id: hid1)

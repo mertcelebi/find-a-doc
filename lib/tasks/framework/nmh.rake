@@ -27,7 +27,7 @@ def process_page_nmh(url, agent)
   rowsOdd[0..(rowsOdd.length - 1)].each do |tr|
     name = tr.search(".doc-content h3 a").text.titleize
     spec = tr.search(".doc-content .doc-heading").first.text.squeeze(" ").strip.titleize
-    print "......Parsing #{name}"
+    print "......Parsing #{name} #{spec}"
     hospital1 = Hospital.find_by_name(hospital_name1)
     hid1 = hospital1.id.to_s
     hospital2 = Hospital.find_by_name(hospital_name2)

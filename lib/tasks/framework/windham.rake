@@ -31,7 +31,7 @@ def process_page_windham(url, agent, depth)
     rows[0..0].each do |li|
       name = li.search("h2").text.squeeze(" ").strip.titleize
       spec = li.search("p").text.squeeze(" ").strip.titleize
-      print "......Parsing #{name}"
+      print "......Parsing #{name} #{spec}"
       hospital = Hospital.find_by_name(hospital_name)
       hid = hospital.id.to_s
       provider  = Provider.create(name: name, hospital_id: hid)

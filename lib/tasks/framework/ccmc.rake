@@ -26,7 +26,7 @@ def parse_page_ccmc(url, agent, depth)
       name = li.search("h2 a").text.titleize
       spec = li.search(".phsy-search-spec a").first
       spec = spec.text.titleize unless spec.nil?
-      print "......Parsing #{name}"
+      print "......Parsing #{name} #{spec}"
       hospital = Hospital.find_by_name(hospital_name)
       hid = hospital.id.to_s
       provider  = Provider.create(name: name, hospital_id: hid)
