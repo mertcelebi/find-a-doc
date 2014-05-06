@@ -63,6 +63,7 @@
               <h5> <%= doctor.name %> </h5>
               <p> <%= doctor.department %> </p>
               <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
+              <p> <%= hospital.phone %> </p>
             </span>
           </li>
         <% end %>
@@ -77,6 +78,7 @@
               <h5> <%= doctor.name %> </h5>
               <p> <%= doctor.department %> </p>
               <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
+              <p> <%= hospital.phone %> </p>
             </span>
           </li>
         <% end %>
@@ -91,6 +93,7 @@
               <h5> <%= doctor.name %> </h5>
               <p> <%= doctor.department %> </p>
               <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
+              <p> <%= hospital.phone %> </p>
             </span>
           </li>
         <% end %>
@@ -104,6 +107,7 @@
                 <h5> <%= doctor.name %> </h5> 
                 <p> <%= doctor.department %> </p>
                 <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
+                <p> <%= hospital.phone %> </p>
               </span>
             </span>
           </li>

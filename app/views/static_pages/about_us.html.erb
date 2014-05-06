@@ -1,6 +1,44 @@
 <% provide(:title, 'About us') %>
 
 <h1>About us</h1>
+<h3>What do we do?</h3>
 <p>
-  Blah Blah Blah.
+  Find-a-Doc is a platform for finding physicians that are at the vicinity of the address input by the patient/user. The search can be customized with the symptoms of the patients to get specialists or if the disorder is already diagnosed, with the ICD-9 code of the disorder.
+</p>
+
+<h3>How do we do?</h3>
+<p>
+  The backend of this project is implemented using the Ruby on Rails framework, backed by a PostgreSQL database. The frontend will mainly be implemented using HTML, CSS and Node.js. We decided to use Ruby on Rails, because it is user-friendly and makes web scraping relatively easy. We  use RSpec testing, using Faker and FactoryGirl gems to test and validate the implementation of our application. <%= link_to "GitHub", "https://github.com/mertcelebi/find-a-doc" %> is used for version controlling.
+</p>
+
+<h3>Challenges</h3>
+<p>
+  <ol>
+    <li> The biggest challenge was our inexperience with web development and web scraping. 
+      Ruby on Rails was a difficult platform to learn properly.
+    </li>
+    <li> Unfortunately, there is a lot of space for technological improvement in healthcare
+      industry. This applies the way any type of data is presented. The lack of standardization made
+      our job of scraping all 29 Connecticut hospitals extremely time consuming.
+    </li>
+    <li>
+      There is no way to systematic way of connecting a symptom and a provider's
+      specialty. We can parse through a lot of symptoms via ICD-9 code, but the
+      relationship to specialty should be hard-coded.
+    </li>
+    <li>
+      Also, there is no standardized format for provider specialties.
+      Our database framework is flexible and accepting different forms
+      of specialties, but this makes the searching process inefficient and inaccurate.
+    </li>
+  </ol>
+</p>
+
+<h3>Next Steps</h3>
+<p>
+  <li> Scrape more data to create a more integrated system for finding
+    physicians.
+    </li>
+    <li> Add autocomplete to search fields, so people do not run into problems.
+    </li>
 </p>

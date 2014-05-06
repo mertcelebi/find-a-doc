@@ -8,7 +8,7 @@ namespace :framework do
     "framework:backus", # Parse CT providers
     "framework:hocc",
     "framework:ccmc",
-    "framework:ynhh",
+    # "framework:ynhh",
     "framework:windham",
     "framework:jmh",
     "framework:chh",

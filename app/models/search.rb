@@ -4,6 +4,7 @@ class Search < ActiveRecord::Base
   before_save { 
     self.city = city.titleize
     self.address = address.titleize
+    self.state = state.upcase
   }
 
   # Associations

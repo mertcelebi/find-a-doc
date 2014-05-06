@@ -13,6 +13,19 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
+
+  config.include FactoryGirl::Syntax::Methods
+
+  # Usage: https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
+  # config.before(:suite) do
+  #   begin
+  #     DatabaseCleaner.start
+  #     FactoryGirl.lint # Build each factory
+  #   ensure
+  #     DatabaseCleaner.clean
+  #   end
+  # end
+  
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -39,7 +52,4 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
-
-  # Add Capybara configuration
-  config.include Capybara::DSL
 end

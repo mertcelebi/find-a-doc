@@ -5,7 +5,7 @@
     <%= f.text_field :specialty, placeholder: "i.e. Internal medicine" %>
     <%= f.label :symptom, "Symptoms" %>
     <%= f.text_field :symptom, placeholder: "i.e. Headache" %>
-    <%= f.label :icd_9, "ICD-9 Code" %>
+    <%= f.label :icd_9, "ICD-9 Code (Maximum 3 Characters)" %>
     <%= f.text_field :icd_9, placeholder: "i.e. 405 (Essential hypertension)" %>
     <%= f.label :address, "Address" %>
     <% if @current_user.address.nil? %>
