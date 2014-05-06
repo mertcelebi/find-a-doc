@@ -12,16 +12,16 @@
   <div class="span8">
     <% if @hospitals.any? %>
       <iframe
-        width="450"
-        height="300"
+        width="500"
+        height="350"
         frameborder="0" style="border:0"
         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0FKqGtrDLb75TcmCX9DZTZyY-GhB8nLA
       &q= <%= @hospitals.first.name %>">  
       </iframe>
     <% elsif @feed_items.any? %>
       <iframe
-        width="450"
-        height="300"
+        width="550"
+        height="350"
         frameborder="0" style="border:0"
         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0FKqGtrDLb75TcmCX9DZTZyY-GhB8nLA
       &q= <%= @feed_items.first.address %>
@@ -31,8 +31,8 @@
       </iframe>
     <% else %>
       <iframe
-          width="450"
-          height="300"
+          width="500"
+          height="350"
           frameborder="0" style="border:0"
           src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0FKqGtrDLb75TcmCX9DZTZyY-GhB8nLA
         &q=<%= current_user.zipcode %> USA">
@@ -54,17 +54,61 @@
         </li>
       <% end %>
     </ol>
-    <h4 class="center">Physicians(<%= @doctors.count %>)</h4>
-    <ol class="searches">
-      <% @doctors.each do |doctor| %>
-        <li>
-          <span class="content center">
-            <h5> <%= doctor.name %> </h5>
-            <p> <%= doctor.department %> </p>
-            <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
-          </span>
-        </li>
-      <% end %>
-    </ol>
+    <% if @doctors_spec.any? %>
+      <h4 class="center">Physicians by Specialty(<%= @doctors_spec.count %>)</h4>
+      <ol class="searches">
+        <% @doctors_spec.each do |doctor| %>
+          <li>
+            <span class="content center">
+              <h5> <%= doctor.name %> </h5>
+              <p> <%= doctor.department %> </p>
+              <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
+            </span>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
+    <% if @doctors_symptom.any? %>
+      <h4 class="center">Physicians by Symptoms(<%= @doctors_symptom.count %>)</h4>
+      <ol class="searches">
+        <% @doctors_symptom.each do |doctor| %>
+          <li>
+            <span class="content center">
+              <h5> <%= doctor.name %> </h5>
+              <p> <%= doctor.department %> </p>
+              <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
+            </span>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
+    <% if @doctors_code.any? %>
+      <h4 class="center">Physicians by ICD-9 Code(<%= @doctors_code.count %>)</h4>
+      <ol class="searches">
+        <% @doctors_code.each do |doctor| %>
+          <li>
+            <span class="content center">
+              <h5> <%= doctor.name %> </h5>
+              <p> <%= doctor.department %> </p>
+              <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
+            </span>
+          </li>
+        <% end %>
+      </ol>
+    <% elsif @doctors.any? %>
+      <h4 class="center">Physicians(<%= @doctors.count %>)</h4>
+      <ol class="searches">
+        <% @doctors.each do |doctor| %>
+          <li>
+            <span class="content center">
+                <h5> <%= doctor.name %> </h5> 
+                <p> <%= doctor.department %> </p>
+                <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
+              </span>
+            </span>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
   </div>
 </div>

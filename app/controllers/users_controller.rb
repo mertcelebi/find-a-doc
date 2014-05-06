@@ -19,9 +19,7 @@ class UsersController < ApplicationController
     @feed_items = current_user.feed.paginate(page: params[:page], per_page: 4)
     s = @feed_items.first
     @hospitals = []
-    print "#{s.address}\n"
     if !(s.address.blank?)
-      print "1111111"
       @hospitals = Hospital.where(address: s.address,
                                   city: s.city,
                                   state: s.state,
@@ -40,18 +38,52 @@ class UsersController < ApplicationController
     else
       @hospitals = Hospital.where(state: s.state)
     end
+    
+    # Arrays for doctors
+    @doctors_spec = []
+    @doctors_code = []
+    @doctors_symptom = []
+    @doctors = []
 
     @hospitals.each do |hospital|
-      hid = hospital.id
+      hid = hospital.id.to_s
       if !(s.specialty.blank?)
         spec = Specialty.find_by(name: s.specialty)
-        sid = spec.provider_id
-        @doctors << Provider.where(hospital_id: hid, id: sid)
-      else
-        @doctors << Provider.find_by(hospital_id: hid)
+        pid = spec.provider_id.to_s
+        temp = Provider.where(hospital_id: hid, id: pid)
+        if !(temp.nil?) && !(temp.blank?)
+          @doctors_spec << temp
+        end
+      end
+
+      if !(s.icd_9.blank?)
+        code = Icd9.find_by(name: s.icd_9)
+        sid = code.specialty_id.to_s
+        spec = Specialty.find_by(id: sid)
+        pid = spec.provider_id.to_s
+        temp = Provider.where(hospital_id: hid, id: pid)
+        if !(temp.nil?) && !(temp.blank?)
+          @doctors_code << temp
+        end
+      end
+
+      if !(s.symptom.blank?)
+        symptom = Symptom.find_by(name: s.symptom)
+        sid = symptom.specialty_id.to_s
+        spec = Specialty.find_by(id: sid)
+        pid = spec.provider_id.to_s
+        temp = Provider.where(hospital_id: hid, id: pid)
+        if !(temp.nil?) && !(temp.blank?)
+          @doctors_symptom << temp
+        end
+      end
+      if (s.symptom.blank?) && (s.specialty.blank?) && (s.icd_9.blank?)
+        temp = Provider.find_by(hospital_id: hid)
+        if !(temp.nil?) && !(temp.blank?)
+          @doctors << temp
+        end
       end
     end
-    @doctors = Provider.where(name: "Mert")
   end
 
   def create
