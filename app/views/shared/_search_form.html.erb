@@ -1,9 +1,19 @@
 <%= form_for(@search) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
+    <%= f.label :specialty, "Specialty" %>
+    <%= f.text_field :address, placeholder: "#i.e. Internal medicine" %>
+    <%= f.label :symptom, "Symptoms" %>
+    <%= f.text_field :address, placeholder: "i.e. Headache" %>
+    <%= f.label :icd_9, "ICD-9 Code" %>
+    <%= f.text_field :address, placeholder: "i.e. 405(Essential hypertension)" %>
     <%= f.label :address, "Address" %>
-    <%= f.text_field :address, placeholder: "#{@current_user.address}" %>
-    <%= f.label :city, "City" %>
+    <% if @current_user.address.nil? %>
+      <%= f.text_field :address, placeholder: "Address" %>
+    <% else %>
+      <%= f.text_field :address, placeholder: "#{@current_user.address}" %>
+    <% end %>
+    <%= f.label :city, "City*" %>
     <%= f.text_field :city, placeholder: "#{@current_user.city}" %>
     <%= f.label :state, "State*" %>
     <%= f.text_field :state, placeholder: "#{@current_user.state}" %>

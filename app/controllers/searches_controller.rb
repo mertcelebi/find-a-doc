@@ -6,10 +6,9 @@ class SearchesController < ApplicationController
   def create
     @search = current_user.searches.build(search_params)
     if @search.save
-      redirect_to root_url
+      redirect_to current_user
     else
-      @feed_items = []
-      render 'static_pages/home'
+      redirect_to root_url
     end
   end
 
@@ -19,7 +18,7 @@ class SearchesController < ApplicationController
 
   def destroy
     @search.destroy
-    redirect_to root_url
+    redirect_to current_user
   end
 
   private

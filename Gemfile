@@ -11,11 +11,6 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'font-awesome-rails'
 gem "paperclip", "~> 4.1"
 
-# Autocompletion
-# gem 'select2-rails'
-# gem 'kaminari'
-gem 'rails4-autocomplete'
-
 # Use postgresql as the database for Active Record
 gem 'pg'
 gem 'thin'

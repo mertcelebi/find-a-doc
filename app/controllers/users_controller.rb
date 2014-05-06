@@ -14,8 +14,44 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @search  = current_user.searches.build
-    @searches = @user.searches.paginate(page: params[:page])
+    # @search  = current_user.searches.build
+    # @searches = @user.searches.paginate(page: params[:page])
+    @feed_items = current_user.feed.paginate(page: params[:page], per_page: 4)
+    s = @feed_items.first
+    @hospitals = []
+    print "#{s.address}\n"
+    if !(s.address.blank?)
+      print "1111111"
+      @hospitals = Hospital.where(address: s.address,
+                                  city: s.city,
+                                  state: s.state,
+                                  zipcode: s.zipcode)
+    end
+
+    if @hospitals.count == 0
+      @hospitals = Hospital.where(city: s.city,
+                                  state: s.state,
+                                  zipcode: s.zipcode)
+    end
+
+    if @hospitals.count == 0
+      @hospitals = Hospital.where(state: s.state,
+                                  zipcode: s.zipcode)
+    else
+      @hospitals = Hospital.where(state: s.state)
+    end
+
+    @hospitals.each do |hospital|
+      hid = hospital.id
+      if !(s.specialty.blank?)
+        spec = Specialty.find_by(name: s.specialty)
+        sid = spec.provider_id
+        @doctors << Provider.where(hospital_id: hid, id: sid)
+      else
+        @doctors << Provider.find_by(hospital_id: hid)
+      end
+    end
+    @doctors = Provider.where(name: "Mert")
   end
 
   def create

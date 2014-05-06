@@ -3,15 +3,68 @@
   <aside class="span4">
     <section>
         <%= render 'shared/user_info' %>
-      </section>
+    </section>
+    <section>
+      <h3>Past Searches (<%= @feed_items.count %>)</h3>  
+      <%= render 'shared/feed' %>
+    </section>
   </aside>
   <div class="span8">
-    <h3>Past Searches (<%= @user.searches.count %>)</h3>
-    <% if @user.searches.any? %>  
-      <ol class="searches">
-        <%= render @searches %>
-      </ol>
-      <%= will_paginate @searches %>
+    <% if @hospitals.any? %>
+      <iframe
+        width="450"
+        height="300"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0FKqGtrDLb75TcmCX9DZTZyY-GhB8nLA
+      &q= <%= @hospitals.first.name %>">  
+      </iframe>
+    <% elsif @feed_items.any? %>
+      <iframe
+        width="450"
+        height="300"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0FKqGtrDLb75TcmCX9DZTZyY-GhB8nLA
+      &q= <%= @feed_items.first.address %>
+          <%= @feed_items.first.city %>
+          <%= @feed_items.first.state %>
+          <%= @feed_items.first.zipcode %> USA">
+      </iframe>
+    <% else %>
+      <iframe
+          width="450"
+          height="300"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0FKqGtrDLb75TcmCX9DZTZyY-GhB8nLA
+        &q=<%= current_user.zipcode %> USA">
+      </iframe>
     <% end %>
+    <h4 class="center">Hospitals(<%= @hospitals.count %>)</h4>
+    <ol class="searches center">
+      <% @hospitals.each do |hospital| %>
+        <li>
+          <span class="content">
+            <h5> <%= hospital.name%> </h5>
+            <%= hospital.address %>
+            <%= hospital.city %>
+            <%= hospital.state %>
+            <%= hospital.zipcode %>
+            <p> <%= hospital.phone %> </p>
+            <%= link_to hospital.website, hospital.website %>
+          </span>
+        </li>
+      <% end %>
+    </ol>
+    <h4 class="center">Physicians(<%= @doctors.count %>)</h4>
+    <ol class="searches">
+      <% @doctors.each do |doctor| %>
+        <li>
+          <span class="content center">
+            <h5> <%= doctor.name %> </h5>
+            <p> <%= doctor.department %> </p>
+            <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
+          </span>
+        </li>
+      <% end %>
+    </ol>
   </div>
 </div>
