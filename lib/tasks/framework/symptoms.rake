@@ -24,10 +24,9 @@ def parse_page_symptom(url, agent, depth, exclude = 0)
   end
   items[0..(items.length - exclude - 1)].each do |li|
     if depth == 4
-      name = li.text
+      name = li.text.titleize
       print "...Parsing #{name}..."
-      symptom = Symptom.find_by_name(name.titleize)
-      symptom ||= Symptom.create(name: name.titleize)
+      symptom = Symptom.create(name: name)
       print "DONE\n"
     else
       if (item_number == 15 && depth == 1) || (depth > 1)

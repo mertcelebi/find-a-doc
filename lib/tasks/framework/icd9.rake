@@ -20,11 +20,10 @@ def parse_page_icd9(url, agent, depth, exclude = 0)
   items = page.search(".codeList li")
   items[0..(items.length - exclude - 1)].each do |li|
     if depth == 3 # Only need (XXX) granularity ICD-9 codes
-      name = li.text.split(" ", 2).last
+      name = li.text.split(" ", 2).last.titleize
       code = li.text.split(" ", 2).first
       print "...Parsing #{name}: #{code}..."
-      icd9 = Icd9.find_by_name_and_icd9_code(name.titleize, code)
-      icd9 ||= Icd9.create(name: name.titleize, icd9_code: code)
+      icd9 = Icd9.create(name: name, icd9_code: code)
       print "DONE\n"
     else
       if !(item_number == 15 && depth == 1)

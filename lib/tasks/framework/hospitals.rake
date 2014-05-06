@@ -24,14 +24,13 @@ def parse_page_hospital(url, agent, depth)
   else
     items = page.search(".locationPlace")
     items[0..(items.length - 1)].each do |li|
-      name = li.search(".locationName").text
+      name = li.search(".locationName").text.titleize
       print "...Parsing #{name}..."
       web = li.search(".locationStreetAddress").text
       phone = li.search(".locationTelephone").text.split(" ", 2).first
-      hospital = Hospital.find_by_name(name.titleize)
-      hospital ||= Hospital.create(name: name.titleize, 
-                                   phone: phone,
-                                   website: web)
+      hospital = Hospital.create(name: name, 
+                                 phone: phone,
+                                 website: web)
       print "DONE\n"
     end
   end

@@ -16,10 +16,9 @@ def parse_page_states(url, agent)
   page = agent.get(url)
   items = page.search(".listStates .floatLeft ul li a")
   items[0..49].each do |li|
-    name = li.text
+    name = li.text.titleize
     print "...Parsing #{name}..."
-    state = State.find_by_name(name.titleize)
-    state ||= State.create(name: name.titleize)
+    state = State.create(name: name)
     print "DONE\n"
   end
 end

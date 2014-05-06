@@ -39,16 +39,10 @@ ActiveRecord::Schema.define(version: 20140505044113) do
   create_table "providers", force: true do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "hospitaL_id"
-    t.datetime "practicing_since"
-    t.string   "school"
-    t.string   "residency"
+    t.string   "department"
+    t.string   "hospital_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
   end
 
   create_table "searches", force: true do |t|
@@ -68,6 +62,7 @@ ActiveRecord::Schema.define(version: 20140505044113) do
 
   create_table "specialties", force: true do |t|
     t.string   "name"
+    t.string   "provider_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
