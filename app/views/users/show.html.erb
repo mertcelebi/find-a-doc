@@ -61,9 +61,9 @@
           <li>
             <span class="content center">
               <h5> <%= doctor.name %> </h5>
-              <p> <%= doctor.department %> </p>
               <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
-              <p> <%= hospital.phone %> </p>
+              <p> <%= Hospital.find_by(id: doctor.hospital_id.to_s).name %> </p>
+              <p> <%= link_to Hospital.find_by(id: doctor.hospital_id.to_s).phone, "" %> </p>
             </span>
           </li>
         <% end %>
@@ -76,9 +76,9 @@
           <li>
             <span class="content center">
               <h5> <%= doctor.name %> </h5>
-              <p> <%= doctor.department %> </p>
               <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
-              <p> <%= hospital.phone %> </p>
+              <p> <%= Hospital.find_by(id: doctor.hospital_id.to_s).name %> </p>
+              <p> <%= link_to Hospital.find_by(id: doctor.hospital_id.to_s).phone, "" %> </p>
             </span>
           </li>
         <% end %>
@@ -86,29 +86,28 @@
     <% end %>
     <% if @doctors_code.any? %>
       <h4 class="center">Physicians by ICD-9 Code(<%= @doctors_code.count %>)</h4>
-      <ol class="searches">
-        <% @doctors_code.each do |doctor| %>
-          <li>
-            <span class="content center">
-              <h5> <%= doctor.name %> </h5>
-              <p> <%= doctor.department %> </p>
-              <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
-              <p> <%= hospital.phone %> </p>
-            </span>
-          </li>
-        <% end %>
-      </ol>
+        <ol class="searches">
+          <% @doctors_code.each do |doctor| %>
+            <li>
+              <span class="content center">
+                <h5> <%= doctor.name %> </h5>
+                <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
+                <p> <%= Hospital.find_by(id: doctor.hospital_id.to_s).name %> </p>
+                <p> <%= link_to Hospital.find_by(id: doctor.hospital_id.to_s).phone, "" %> </p>
+              </span>
+            </li>
+          <% end %>
+        </ol>
     <% elsif @doctors.any? %>
       <h4 class="center">Physicians(<%= @doctors.count %>)</h4>
       <ol class="searches">
         <% @doctors.each do |doctor| %>
           <li>
             <span class="content center">
-                <h5> <%= doctor.name %> </h5> 
-                <p> <%= doctor.department %> </p>
-                <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
-                <p> <%= hospital.phone %> </p>
-              </span>
+            <h5> <%= doctor.name %> </h5> 
+            <%= Specialty.find_by(provider_id: doctor.id.to_s).name %>
+            <p> <%= Hospital.find_by(id: doctor.hospital_id.to_s).name %> </p>
+            <p> <%= link_to Hospital.find_by(id: doctor.hospital_id.to_s).phone, "" %> </p>
             </span>
           </li>
         <% end %>

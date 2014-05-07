@@ -20,23 +20,29 @@ class UsersController < ApplicationController
     s = @feed_items.first
     @hospitals = []
     if !(s.address.blank?)
-      @hospitals = Hospital.where(address: s.address,
-                                  city: s.city,
-                                  state: s.state,
-                                  zipcode: s.zipcode)
+      temp = Hospital.where(address: s.address,
+                            city: s.city,
+                            state: s.state,
+                            zipcode: s.zipcode)
+      @hospitals += temp
     end
 
-    if @hospitals.count == 0
-      @hospitals = Hospital.where(city: s.city,
-                                  state: s.state,
-                                  zipcode: s.zipcode)
+    if @hospitals.empty?
+      temp = Hospital.where(city: s.city,
+                            state: s.state,
+                            zipcode: s.zipcode)
+      @hospitals += temp
     end
 
-    if @hospitals.count == 0
-      @hospitals = Hospital.where(state: s.state,
-                                  zipcode: s.zipcode)
-    else
-      @hospitals = Hospital.where(state: s.state)
+    if @hospitals.empty?
+      temp = Hospital.where(state: s.state,
+                            zipcode: s.zipcode)
+      @hospitals += temp
+    end
+    
+    if @hospitals.empty?
+      temp = Hospital.where(state: s.state)
+      @hospitals += temp
     end
     
     # Arrays for doctors
@@ -47,41 +53,61 @@ class UsersController < ApplicationController
 
     @hospitals.each do |hospital|
       hid = hospital.id.to_s
-      if !(s.specialty.blank?)
-        spec = Specialty.find_by(name: s.specialty)
-        pid = spec.provider_id.to_s
-        temp = Provider.where(hospital_id: hid, id: pid)
-        if !(temp.nil?) && !(temp.blank?)
-          @doctors_spec << temp
+      
+      # If specialty is present
+      if s.specialty
+        all_providers = Provider.where(hospital_id: hid)
+        all_providers.each do |prov|
+          pid = prov.id.to_s
+          spec = Specialty.find_by(name: s.specialty, provider_id: pid)
+          if spec
+            @doctors_spec << prov
+          end 
         end
       end
 
-      if !(s.icd_9.blank?)
-        code = Icd9.find_by(name: s.icd_9)
-        sid = code.specialty_id.to_s
-        spec = Specialty.find_by(id: sid)
-        pid = spec.provider_id.to_s
-        temp = Provider.where(hospital_id: hid, id: pid)
-        if !(temp.nil?) && !(temp.blank?)
-          @doctors_code << temp
+      # If ICD-9 code is present
+      if s.icd_9
+        code = Icd9.find_by(icd9_code: s.icd_9)
+        if code
+          sid = code.specialty_id.to_s
+          spec = Specialty.find_by(id: sid)
+          if spec
+            all_providers = Provider.where(hospital_id: hid)
+            all_providers.each do |prov|
+              pid = prov.id.to_s
+              sp = Specialty.find_by(name: spec.name, provider_id: pid)
+              if sp
+                @doctors_code << prov
+              end
+            end
+          end
         end
       end
 
-      if !(s.symptom.blank?)
-        symptom = Symptom.find_by(name: s.symptom)
-        sid = symptom.specialty_id.to_s
-        spec = Specialty.find_by(id: sid)
-        pid = spec.provider_id.to_s
-        temp = Provider.where(hospital_id: hid, id: pid)
-        if !(temp.nil?) && !(temp.blank?)
-          @doctors_symptom << temp
+      # If Symptom is present
+      if s.symptom
+        code = Symptom.find_by(name: s.symptom)
+        if code
+          sid = code.specialty_id.to_s
+          spec = Specialty.find_by(id: sid)
+          if spec
+            all_providers = Provider.where(hospital_id: hid)
+            all_providers.each do |prov|
+              pid = prov.id.to_s
+              sp = Specialty.find_by(name: spec.name, provider_id: pid)
+              if sp
+                @doctors_symptom << prov
+              end
+            end
+          end
         end
       end
+
+      # Search with only location
       if (s.symptom.blank?) && (s.specialty.blank?) && (s.icd_9.blank?)
-        temp = Provider.find_by(hospital_id: hid)
-        if !(temp.nil?) && !(temp.blank?)
-          @doctors << temp
-        end
+        temp = Provider.where(hospital_id: hid)
+        @doctors += temp
       end
     end
   end

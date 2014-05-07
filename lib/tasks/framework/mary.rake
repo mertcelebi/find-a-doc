@@ -15,7 +15,6 @@ end
 
 def process_page_mary(url, agent, page)
   hospital_name = "Saint Mary's Hospital".titleize
-  print "#{page}\n"
   page = agent.get(url)
   valid = page.search(".BreadCrumbs p strong").text
   if valid == "Provider profile advanced"
